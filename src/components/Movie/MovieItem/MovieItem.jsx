@@ -6,7 +6,7 @@ function MovieItem({ movie }) {
   
   const { id, title, name, original_name: originalName } = movie;
   return (
-    <Link to={`/movies/${id}`} state={{ from: location }}>
+    <Link to={`/movies/${id}`} state={{ from: location}}>
       <li className={styles.item}>
         <span>{title || name || originalName}</span>
       </li>

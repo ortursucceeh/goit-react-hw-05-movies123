@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, Outlet, useParams } from "react-router-dom"
+import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 
 import { useMovies } from "contexts/MoviesContext";
 import Spinner from "components/Spinner/Spinner";
@@ -9,6 +9,7 @@ import BackButton from "components/BackButton/BackButton";
 
 function Movie() {
   const { id } = useParams()
+  const location = useLocation();
   const { currentMovie, getMovie, isLoading } = useMovies();
 
   useEffect(function () {
@@ -37,8 +38,8 @@ function Movie() {
       <div className={styles.moviePage}>
         <div className={styles.movie}>
           <div>
-              {imgUrl && <img className={styles.poster} src={`https://image.tmdb.org/t/p/original${imgUrl}`} alt="img" />}
-              <BackButton />
+            {imgUrl && <img className={styles.poster} src={`https://image.tmdb.org/t/p/original${imgUrl}`} alt="img" />}
+            <BackButton />
           </div>
           <div>
             <h2 className={styles.title}>{title || name || originalName} ({releaseDate?.slice(0, 4)})</h2>
@@ -58,8 +59,8 @@ function Movie() {
             <h4>Additional info</h4>
           
             <div className={styles.additional}>
-              <Link to='reviews'>Reviews</Link >
-              <Link to='cast'>Cast</Link >
+              <Link to='reviews' state={location.state}>Reviews</Link >
+              <Link to='cast' state={location.state}>Cast</Link >
             </div>
             <Outlet />
           </div>

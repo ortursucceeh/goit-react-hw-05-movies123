@@ -3,7 +3,8 @@ import styles from './BackButton.module.css'
 
 function BackButton() {
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/";
+  console.log('location :>> ', location.state.from);
+  const backLinkHref = location.state?.from || "/";
 
   return (
     <Link to={backLinkHref}><button className={styles.back}>&larr; Back</button></Link>
