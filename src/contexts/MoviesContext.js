@@ -43,6 +43,7 @@ function MovieProvider({ children }) {
         const res = await fetch(`${BASE_URL}/movie/${id}`, options);
         const data = await res.json();
         setCurrentMovie(data);
+        console.log('movie :>> ', data);
       } catch (err) {
         alert('There was an error loading data...');
       } finally {

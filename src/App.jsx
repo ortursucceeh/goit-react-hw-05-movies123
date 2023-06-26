@@ -6,11 +6,13 @@ import Homepage from "pages/Homepage/Homepage";
 import Movie from "components/Movie/Movie";
 import MovieCast from "components/MovieCast/MovieCast";
 import MovieReviews from "components/MovieReviews/MovieReviews";
+import Navbar from "components/Navbar/Navbar";
 
 export const App = () => {
   return (
     <MovieProvider>
       <BrowserRouter>
+        <Navbar/>
         <Routes>
           <Route index element={<Homepage />}/>
           <Route path="movies" element={<Movies />}/>

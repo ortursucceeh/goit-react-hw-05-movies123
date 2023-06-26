@@ -18,7 +18,7 @@ function MovieReviews() {
   return (
     <div>
       <h3>Reviews  for {title}</h3>
-      {reviews.length > 0
+      {reviews?.length > 0
         ? (<ul>{reviews.map(review => <MovieReviewItem key={review.id} review={review}/>)}</ul>)
         : <strong>There is no review yet!</strong>}
     </div>
@@ -26,3 +26,4 @@ function MovieReviews() {
 }
 
 export default MovieReviews
+ 

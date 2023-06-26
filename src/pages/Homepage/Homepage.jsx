@@ -6,7 +6,6 @@ function Homepage() {
   
   return (
     <div>
-      <Navbar />
       <h1 className={styles.header}>Trending Today</h1>
       <MovieList/>
     </div>
