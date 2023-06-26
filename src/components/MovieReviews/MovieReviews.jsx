@@ -1,8 +1,9 @@
-import MovieReviewItem from "components/MovieReviewItem/MovieReviewItem";
-import Spinner from "components/Spinner/Spinner";
-import { useMovies } from "contexts/MoviesContext"
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import { useMovies } from "contexts/MoviesContext"
+import MovieReviewItem from "./MovieReviewItem/MovieReviewItem";
+import Spinner from "components/Spinner/Spinner";
 
 function MovieReviews() {
   const { id } = useParams();
@@ -14,10 +15,10 @@ function MovieReviews() {
 
   if (isCastLoading) return <Spinner />;
 
-  const {reviews, title} = currentMovie
+  const {reviews} = currentMovie
   return (
     <div>
-      <h3>Reviews  for {title}</h3>
+      <h3>Reviews:</h3>
       {reviews?.length > 0
         ? (<ul>{reviews.map(review => <MovieReviewItem key={review.id} review={review}/>)}</ul>)
         : <strong>There is no review yet!</strong>}

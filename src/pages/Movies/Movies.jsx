@@ -1,9 +1,11 @@
-import Navbar from "components/Navbar/Navbar"
+import MovieSearch from "components/MovieSearch/MovieSearch"
+import { Outlet } from "react-router-dom"
 
 function Movies() {
   return (
     <div>
-      Movies
+      <MovieSearch />
+      <Outlet/>
     </div>
   )
 }

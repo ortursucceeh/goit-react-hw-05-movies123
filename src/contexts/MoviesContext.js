@@ -11,6 +11,7 @@ function MovieProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isCastLoading, setIsCastLoading] = useState(false);
   const [currentMovie, setCurrentMovie] = useState({});
+  const [searchMovies, setSearchMovies] = useState([]);
 
   const options = {
     method: 'GET',
@@ -43,7 +44,6 @@ function MovieProvider({ children }) {
         const res = await fetch(`${BASE_URL}/movie/${id}`, options);
         const data = await res.json();
         setCurrentMovie(data);
-        console.log('movie :>> ', data);
       } catch (err) {
         alert('There was an error loading data...');
       } finally {
@@ -59,7 +59,6 @@ function MovieProvider({ children }) {
         setIsCastLoading(true);
         const res = await fetch(`${BASE_URL}/movie/${id}/credits`, options);
         const data = await res.json();
-        console.log('data :>> ', data);
         setCurrentMovie(currentMovie => ({ ...currentMovie, cast: data.cast }));
       } catch (err) {
         alert('There was an error loading data...');
@@ -76,7 +75,6 @@ function MovieProvider({ children }) {
         setIsCastLoading(true);
         const res = await fetch(`${BASE_URL}/movie/${id}/reviews`, options);
         const data = await res.json();
-        console.log('data :>> ', data);
         setCurrentMovie(currentMovie => ({
           ...currentMovie,
           reviews: data.results,
@@ -90,16 +88,34 @@ function MovieProvider({ children }) {
     fetchMovieCast();
   }
 
+  async function searchMovie(movie) {
+    async function fetchMovie() {
+      try {
+        setIsLoading(true);
+        const res = await fetch(`${BASE_URL}/search/movie?query=${movie}`, options);
+        const data = await res.json();
+        setSearchMovies(data.results);
+      } catch (err) {
+        alert('There was an error loading data...');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchMovie();
+  }
+
   return (
     <MoviesContext.Provider
       value={{
         movies,
+        searchMovies,
         isLoading,
         isCastLoading,
         currentMovie,
         getMovie,
         getMovieCast,
         getMovieReviews,
+        searchMovie,
       }}
     >
       {children}
@@ -109,8 +125,7 @@ function MovieProvider({ children }) {
 
 function useMovies() {
   const context = useContext(MoviesContext);
-  if (context === undefined)
-    throw new Error('MoviesContext was used outside the provider');
+  if (context === undefined) throw new Error('MoviesContext was used outside the provider');
   return context;
 }
 

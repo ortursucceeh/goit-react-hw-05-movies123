@@ -1,8 +1,10 @@
-import MovieCastItem from "components/MovieCastItem/MovieCastItem";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import MovieCastItem from "./MovieCastItem/MovieCastItem";
 import Spinner from "components/Spinner/Spinner";
 import { useMovies } from "contexts/MoviesContext";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import styles from './MovieCast.module.css'
 
 function MovieCast() {
   const { id } = useParams();
@@ -15,9 +17,9 @@ function MovieCast() {
 
   return (
     <div>
-      Movie Cast {currentMovie.title}
-      {currentMovie.cast && currentMovie.cast.map(actor =>
-        <MovieCastItem key={actor.cast_id} actor={actor} />)}
+      <h3>Movie Cast: </h3>
+      {currentMovie.cast && (<div className={styles.cast}>{currentMovie.cast.map(actor =>
+        <MovieCastItem key={actor.cast_id} actor={actor} />) }</div>)}
     </div>
   )
 }

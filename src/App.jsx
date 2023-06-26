@@ -7,6 +7,8 @@ import Movie from "components/Movie/Movie";
 import MovieCast from "components/MovieCast/MovieCast";
 import MovieReviews from "components/MovieReviews/MovieReviews";
 import Navbar from "components/Navbar/Navbar";
+import MovieList from "components/MovieList/MovieList";
+import MovieDetails from "pages/MovieDetails/MovieDetails";
 
 export const App = () => {
   return (
@@ -14,10 +16,12 @@ export const App = () => {
       <BrowserRouter>
         <Navbar/>
         <Routes>
-          <Route index element={<Homepage />}/>
-          <Route path="movies" element={<Movies />}/>
-          <Route path="movies/:id" element={<Movie />}>
-            <Route path="credits" element={<MovieCast />}/>
+          <Route path="/" element={<Homepage />}/>
+          <Route path="movies" element={<Movies />}>
+            <Route path="?query=:movie" element={<MovieList />}></Route>
+          </Route>
+          <Route path="movies/:id" element={<MovieDetails />}>
+            <Route path="cast" element={<MovieCast />}/>
             <Route path="reviews" element={<MovieReviews />}/>
           </Route>
           <Route path="*" element={<NotFound />} />

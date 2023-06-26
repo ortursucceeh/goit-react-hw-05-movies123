@@ -22,11 +22,14 @@ function Movie() {
     poster_path: imgUrl,
     vote_average: score,
     vote_count: scoreCount,
-    genres
+    genres,
+    success,
+    status_message: message
   } = currentMovie;
 
   if (isLoading) return <Spinner /> 
 
+  if (success === false) return <h2>{message }</h2>
   return (
     <div className={styles.moviePage}>
       <div className={styles.movie}>
@@ -51,13 +54,11 @@ function Movie() {
           <h4>Additional info</h4>
           <div className={styles.additional}>
             <Link to='reviews'>Reviews</Link >
-            <Link to='credits'>Credits</Link >
+            <Link to='cast'>Cast</Link >
           </div>
           <Outlet />
         </div>
       </div>
-      
-
     </div>
   )
 }
