@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import styles from './MovieSearch.module.css'
 import { useMovies } from 'contexts/MoviesContext';
-import MovieSearchList from './MovieSearchList/MovieSearchList';
+import Spinner from 'components/Spinner/Spinner';
+
+const MovieSearchList = lazy(() => import("./MovieSearchList/MovieSearchList"));
 
 function MovieSearch() {
   const [searchValue, setSearchValue] = useState('');
@@ -31,11 +33,11 @@ function MovieSearch() {
         <input id="search" className={styles.input} type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)}/>
         <button type="submit" className={styles.button}>Search</button>
       </form>
-      { query && searchMovies.length > 0 && <MovieSearchList/>}
-    </div>
-    
+      <Suspense fallback={<Spinner/>}>
+        {query && searchMovies.length > 0 && <MovieSearchList />}
+      </Suspense>
+    </div>    
   )
 }
-
 
 export default MovieSearch

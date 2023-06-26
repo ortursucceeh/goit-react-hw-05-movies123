@@ -31,10 +31,10 @@ function Movie() {
 
   if (isLoading) return <Spinner /> 
 
-  if (success === false) return <h2>{message }</h2>
+  if (success === false) return <h2>{message}</h2>
+  
   return (
     <>
-      
       <div className={styles.moviePage}>
         <div className={styles.movie}>
           <div>
@@ -57,7 +57,6 @@ function Movie() {
               </>}
             </div>}
             <h4>Additional info</h4>
-          
             <div className={styles.additional}>
               <Link to='reviews' state={location.state}>Reviews</Link >
               <Link to='cast' state={location.state}>Cast</Link >
@@ -65,7 +64,7 @@ function Movie() {
             <Outlet />
           </div>
         </div>
-        </div>
+      </div>  
   </>
   )
 }

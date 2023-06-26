@@ -2,10 +2,7 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { MovieProvider } from "contexts/MoviesContext";
-// import Movies from "pages/Movies/Movies";
-// import NotFound from "pages/NotFound/NotFound";
 import Homepage from "pages/Homepage/Homepage";
-// import MovieDetails from "pages/MovieDetails/MovieDetails";
 
 import MovieCast from "components/MovieCast/MovieCast";
 import MovieReviews from "components/MovieReviews/MovieReviews";
